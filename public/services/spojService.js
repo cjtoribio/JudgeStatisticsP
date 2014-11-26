@@ -3,12 +3,12 @@ angular.module('JudgeStatsApp')
     return {
     	getSubmissions : function(handle, callback) {
     		$resource('/spoj/subs/:id').query({
-    			id: 1,
+    			id: handle,
     		}, callback);
 		},
     	getStats : function(handle, callback) {
     		$resource('/spoj/stats/:id').get({
-    			id: 1,
+    			id: handle,
     		}, callback);
 		}
     };

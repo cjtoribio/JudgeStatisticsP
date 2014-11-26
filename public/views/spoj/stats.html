@@ -39,8 +39,8 @@
 			}
 			.submissionsTable thead th {
 			    height: 30px;
-			    border-bottom: none !important;
 			    text-align: center;
+			    border-bottom: none !important;
 			}
 			.submissionsTable tbody {
 			    height: 270px;
@@ -49,6 +49,11 @@
 			    text-align: center;
 			}
 			.submissionsTable thead {
+				background-color: #428BCA;
+			    border-bottom: 1px solid black;
+			    color: white;
+			    box-shadow: 0px 5px 5px -3px black;
+			    margin-bottom:5px;
 			    /* fallback */
 			}
 			.submissionsTable tbody td,.submissionsTable thead th {
@@ -78,8 +83,7 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr style="display:none;" infinite-scroll="seeMore()"  infinite-scroll-distance="0" infinite-scroll-disabled="subs.length == viewedSubs.length"></tr>
-				<tr  ng-repeat="sub in viewedSubs" >
+				<tr  ng-repeat="sub in subs" >
 					<td>{{sub.problemCode}}</td>
 					<td>{{sub.id}}</td>
 					<td>{{sub.submissionDate | date}}</td>
@@ -94,11 +98,11 @@
 		<table class="table">
 			<tr>
 				<td>% Tenacity</td>
-				<td>0%</td> <!-- log([11-x/10])/log(11)*100 -->
+				<td>{{stats.tenacity}}%</td> <!-- log([11-x/10])/log(11)*100 -->
 			</tr>
 			<tr>
 				<td>% Accuracy</td>
-				<td>100%</td>
+				<td>{{stats.accuracy}}%</td>
 			</tr>
 			<tr>
 				<td>
@@ -110,15 +114,15 @@
 				<td>
 					Last Submission: 
 				</td>
-				<td>ID: 1042563, Date: 2014-12-12</td>
+				<td>{{stats.lastSubmission | date}}</td>
 			</tr>
 			<tr>
 				<td>ToDo Size:</td>
-				<td>256</td>
+				<td>{{stats.todoSize}}</td>
 			</tr>
 			<tr>
 				<td>Problems Solved:</td>
-				<td>1020</td>
+				<td>{{stats.problemsSolved}}</td>
 			</tr>
 		</table>
 	</div>

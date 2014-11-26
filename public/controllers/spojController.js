@@ -5,18 +5,23 @@ angular.module('JudgeStatsApp').controller('SpojController',
 			$scope.submissions = {};
 			$scope.veredicts = [ 'AC', 'WA', 'TLE', 'RE' ];
 			$scope.submit = function() {
-				Spoj.getSubmissions(null, function(data){
-					$scope.viewedSubs = [];
-					$scope.subs = data;
-					for(var i = 0; i < data.length; ++i){
-						var sub = $scope.subs[i];
-						sub.insertDate = new Date(sub.insertDate);
+				Spoj.getSubmissions($scope.handle, function(data){
+					angular.forEach(data , function(sub, index){
 						sub.submissionDate = new Date(sub.submissionDate);
-					}
-				})
-				Spoj.getStats(null, function(data){
+						sub.insertDate = new Date(sub.insertDate);
+					});
+					$scope.subs = data;
+				});
+				Spoj.getStats($scope.handle, function(data){
+					data.lastSubmission = new Date(data.lastSubmission);
 					$scope.stats = data;
-				})
+					$scope.data.data[0].y = [];
+					$scope.data.data[0].tooltip = [];
+					angular.forEach($scope.data.series , function(ser , idx){
+						$scope.data.data[0].y.push(data.veredictMap[ser]);
+						$scope.data.data[0].tooltip.push(data.veredictMap[ser]);
+					});
+				});
 			};
 
 			$scope.viewedSubs = [];
@@ -42,22 +47,12 @@ angular.module('JudgeStatsApp').controller('SpojController',
 					};
 			
 			$scope.data = {
-//				    series: ['AC', 'WA', 'TLE', 'RE', 'CE', '--'],
-//				    data: [{
-//				      x: "TotalProblems",
-//				      y: [24,54,9,4,5,6],
-//				      tooltip: [1,2,3,4,5]
-//				    }]
+				    series: ['AC', 'WA', 'TLE', 'RE', 'CE', '--'],
+				    data: [{
+				      x: "TotalProblems",
+				      y: [0,0,0,0,0,0],
+				      tooltip: [1,2,3,4,5]
+				    }]
 			};
 			
-			
-			$scope.seeMore = function(){
-				if($scope.busy)return;
-				$scope.busy = 1;
-			    var last = $scope.viewedSubs.length;
-			    var subArr = $scope.subs.slice(last,last+50);
-			    console.log(1);
-			    $scope.viewedSubs.push.apply($scope.viewedSubs , subArr);
-				$scope.busy = 0;
-			}
 		});

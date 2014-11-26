@@ -37,6 +37,7 @@ class Submissions(Resource):
         subs = subsDao.getUserSubmissions(userId , "SPOJ", veredict and veredict.upper())
         return subs
     
+    @marshal_with(post_fields)
     def post(self, userId):
         from app.crawlers.SpojCrawler import getSubmissionHistory
         user = userDao.getUserById(userId)
@@ -67,7 +68,7 @@ class SubmissionsStats(Resource):
     @marshal_with(get_fields)
     def get(self, userId):
         ret = {}
-        subs = subsDao.getUserSubmissions(userId, 'SPOJ')
+        subs = subsDao.getUserSubmissions(userId, 'SPOJ', limit = 100000)
         allAc = filter(lambda x: x.veredict == 'AC' , subs)
         last = None if len(subs) == 0 else max(sub.submissionDate for sub in subs)
         probAC = set(map(lambda x: x.problemCode, allAc))

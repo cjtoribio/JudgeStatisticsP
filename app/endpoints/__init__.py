@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask , request
 from flask_restful import Resource, reqparse
 import flask_restful
 import json
@@ -8,11 +8,13 @@ from app.db import subsDao
 from app.model.Submission import Submission
 from app.util import DateUtils
 from app.util.DateUtils import DateFormat
+from flask_httpauth import HTTPBasicAuth
 
 
 port = Flask(__name__, static_folder='../../public', static_url_path='')
-
 restApi = flask_restful.Api(port)
+auth = HTTPBasicAuth()
+
 
 def restResourceDecorator(*urls, **kwargs):
     def decorator(clazz):
@@ -21,6 +23,14 @@ def restResourceDecorator(*urls, **kwargs):
         return clazz
     return decorator
 restApi.resource = restResourceDecorator
+
+tokens = {}
+
+
+@auth.verify_password
+def verify_password(username, password):
+    print ' "%s" has been logged with password "%s" ' % (username , password)
+    return True 
 
 
 import SpojService

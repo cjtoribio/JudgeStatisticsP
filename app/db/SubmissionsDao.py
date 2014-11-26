@@ -39,12 +39,14 @@ class SubmissionsDao:
             )
         self.conn.commit()
    
-    def getUserSubmissions(self, uid, judge = None, veredict = None):
+    def getUserSubmissions(self, uid, judge = None, veredict = None, limit = 100):
         query = """
             SELECT %s from submissions
              WHERE userId = %d """ % (Submission.fields() , uid)
         if judge != None : query += " AND judge = '%s'" % judge
         if veredict != None : query += " AND veredict = '%s'" % veredict
+        query += " ORDER BY id desc "
+        query += " LIMIT %s " % limit
             
         ret = []
         for row in self.conn.execute(query):
