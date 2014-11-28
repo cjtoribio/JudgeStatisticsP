@@ -20,35 +20,29 @@
 	<script src="vendor/d3.min.js"></script>
 	<script src="vendor/angular-charts.min.js"></script>
 	<script src="vendor/infinite-scroll.min.js"></script>
+	<script src="vendor/cookies.js"></script>
 
 	<script src="app.js"></script>
-	<script src="controllers/spojController.js"></script>
+	
+	
+	<script src="services/messageService.js"></script>
 	<script src="services/spojService.js"></script>
+	<script src="services/loginService.js"></script>
+	
+	
+	<script src="controllers/loginController.js"></script>
+	<script src="controllers/spojController.js"></script>
 	<script src="filters/date.js"></script>
 	<script src="filters/dataFilter.js"></script>
 	
 	<script src="directives/spojVNav.js"></script>
+	<script src="directives/messages.js"></script>
 	
 	
 </head>
 <body>
 
-	<section class="header">
-		<ul class="nav nav-pills" role="tablist">
-			<li class="active"><a href="#">SPOJ</a></li>
-			<li><a href="#">Codeforces</a></li>
-			<li><a href="#">Codechef</a></li>
-		</ul>
-	</section>
-	<section class="body">
-		<spoj-v-nav class="leftPanel">
-		</spoj-v-nav>
-		<div class="contentPanel" ng-view>
-			
-		</div>
-	</section>
-
-	
+	<div class="contentPanel" ng-view>
 	
 </body>
 

@@ -6,14 +6,11 @@ section.header {
 	background-color: white;
 }
 section.body {
-	background-color: #eee;
+	background-color: #fff;
 	display: table;
 	width: 100%;
 	height: 90%;
 	position: absolute;
-}
-div.contentPanel {
-	display: table-cell;
 }
 .leftPanel {
 	padding: 5px;

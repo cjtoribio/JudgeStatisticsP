@@ -29,8 +29,7 @@ tokens = {}
 
 @auth.verify_password
 def verify_password(username, password):
-    print ' "%s" has been logged with password "%s" ' % (username , password)
-    return True 
+    return password == '=1=test=1=test=1='
 
 
 import SpojService

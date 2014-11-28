@@ -1,18 +1,18 @@
 angular.module('JudgeStatsApp').controller('SpojController',
-		function($scope, $alert, Spoj) {
+		function($scope, $alert, Spoj, LoginService) {
 			$scope.handle = '';
 			$scope.handles = [];
 			$scope.submissions = {};
 			$scope.veredicts = [ 'AC', 'WA', 'TLE', 'RE' ];
-			$scope.submit = function() {
-				Spoj.getSubmissions($scope.handle, function(data){
+			if(LoginService.isOnline()){
+				Spoj.getSubmissions(LoginService.authData.id, function(data){
 					angular.forEach(data , function(sub, index){
 						sub.submissionDate = new Date(sub.submissionDate);
 						sub.insertDate = new Date(sub.insertDate);
 					});
 					$scope.subs = data;
 				});
-				Spoj.getStats($scope.handle, function(data){
+				Spoj.getStats(LoginService.authData.id, function(data){
 					data.lastSubmission = new Date(data.lastSubmission);
 					$scope.stats = data;
 					$scope.data.data[0].y = [];
@@ -22,7 +22,7 @@ angular.module('JudgeStatsApp').controller('SpojController',
 						$scope.data.data[0].tooltip.push(data.veredictMap[ser]);
 					});
 				});
-			};
+			}
 
 			$scope.viewedSubs = [];
 			$scope.subs = []

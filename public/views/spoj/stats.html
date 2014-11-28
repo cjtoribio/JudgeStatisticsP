@@ -1,4 +1,14 @@
-<form class="form-inline" role="form" ng-controller="SpojController">
+
+<section class="header">
+	<ul class="nav nav-pills" role="tablist">
+		<li class="active"><a href="#">SPOJ</a></li>
+		<li><a href="#">Codeforces</a></li>
+		<li><a href="#">Codechef</a></li>
+	</ul>
+</section>
+<section class="body">
+	<spoj-v-nav class="leftPanel"> </spoj-v-nav>
+	<form class="form-inline" role="form" ng-controller="SpojController">
 		<div style="display: inline-table; width: 30px;"></div>
 		<div class="form-group">
 			<div class="input-group">
@@ -8,124 +18,125 @@
 			</div>
 		</div>
 		<button type="submit" class="btn btn-default" ng-click="submit()">
-			Run Stats
-		</button>
-		
+			Run Stats</button>
+
 		<style>
-			.chart {
-				height: 300px;
-			}
-			.submissionsTable{
-				height: 300px;
-				margin-bottom: 10px;
-				border-radius: 5px;
-				border: 1px solid #aaa;
-				padding:0px;
-				box-shadow: 0px 0px 2px 0px #aaa;
-			}
-			.submissionsTable table {
-		        width: 100%;
-		    }
-			.submissionsTable thead, 
-			.submissionsTable tbody,
-			.submissionsTable tr,
-			.submissionsTable td,
-			.submissionsTable th { display: block; }
-			.submissionsTable tr:after {
-			    content: ' ';
-			    display: block;
-			    visibility: hidden;
-			    clear: both;
-			}
-			.submissionsTable thead th {
-			    height: 30px;
-			    text-align: center;
-			    border-bottom: none !important;
-			}
-			.submissionsTable tbody {
-			    height: 270px;
-			    overflow-y: auto;
-				border-radius: 0px 0px 5px 5px;
-			    text-align: center;
-			}
-			.submissionsTable thead {
-				background-color: #428BCA;
-			    border-bottom: 1px solid black;
-			    color: white;
-			    box-shadow: 0px 5px 5px -3px black;
-			    margin-bottom:5px;
-			    /* fallback */
-			}
-			.submissionsTable tbody td,.submissionsTable thead th {
-			    width: 14.2%;
-			    float: left;
-			}
-		</style>
-	<div style="border-top:1px solid #aaa;margin-top:10px;"></div>
-	<div class="jumbotron">
-		<div 
-			data-ac-chart="'bar'" 
-			data-ac-data="data" 
-			data-ac-config="config"
-			class="chart col-md-3">
-		</div>
-		<div class="col-md-9 submissionsTable"  >
+.chart {
+	height: 300px;
+}
+
+.submissionsTable {
+	height: 300px;
+	margin-bottom: 10px;
+	padding: 0px;
+	background-color: #f8f8f8;
+}
+
+.submissionsTable table {
+	width: 100%;
+}
+
+.submissionsTable thead, .submissionsTable tbody, .submissionsTable tr,
+	.submissionsTable td, .submissionsTable th {
+	display: block;
+}
+
+.submissionsTable tr:after {
+	content: ' ';
+	display: block;
+	visibility: hidden;
+	clear: both;
+}
+
+.submissionsTable thead th {
+	height: 30px;
+	text-align: center;
+	border-bottom: none !important;
+}
+
+.submissionsTable tbody {
+	height: 270px;
+	overflow-y: auto;
+	text-align: center;
+	margin-bottom: -5px;
+}
+
+.submissionsTable thead {
+	background-color: #428BCA;
+	border-bottom: 1px solid black;
+	color: white;
+	box-shadow: 0px 3px 2px -3px black;
+	border-radius: 5px 5px 0px 0px;
+	/* fallback */
+}
+
+.submissionsTable tbody td, .submissionsTable thead th {
+	width: 14.2%;
+	float: left;
+}
+</style>
+		<div style="border-top: 1px solid #aaa; margin-top: 10px;"></div>
+		<div class="jumbotron" style="background-color: #fff;">
+			<div data-ac-chart="'bar'" data-ac-data="data"
+				data-ac-config="config" class="chart col-md-3"></div>
+			<div class="col-md-9 submissionsTable">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>ProblemCode</th>
+							<th>Id</th>
+							<th>Date</th>
+							<th>Veredict</th>
+							<th>Language</th>
+							<th>Time</th>
+							<th>Memory</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="sub in subs">
+							<td>{{sub.problemCode}}</td>
+							<td>{{sub.id}}</td>
+							<td>{{sub.submissionDate | date}}</td>
+							<td>{{sub.veredict}}</td>
+							<td>{{sub.lang}}</td>
+							<td>{{sub.time}}</td>
+							<td>{{sub.memory}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 			<table class="table">
-				<thead>
 				<tr>
-					<th>ProblemCode</th>
-					<th>Id</th>
-					<th>Date</th>
-					<th>Veredict</th>
-					<th>Language</th>
-					<th>Time</th>
-					<th>Memory</th>
+					<td>% Tenacity</td>
+					<td>{{stats.tenacity}}%</td>
+					<!-- log([11-x/10])/log(11)*100 -->
 				</tr>
-				</thead>
-				<tbody>
-				<tr  ng-repeat="sub in subs" >
-					<td>{{sub.problemCode}}</td>
-					<td>{{sub.id}}</td>
-					<td>{{sub.submissionDate | date}}</td>
-					<td>{{sub.veredict}}</td>
-					<td>{{sub.lang}}</td>
-					<td>{{sub.time}}</td>
-					<td>{{sub.memory}}</td>
+				<tr>
+					<td>% Accuracy</td>
+					<td>{{stats.accuracy}}%</td>
 				</tr>
-				</tbody>
+				<tr>
+					<td>Practice Level</td>
+					<td title="problems per day">100 PPD</td>
+				</tr>
+				<tr>
+					<td>Last Submission:</td>
+					<td>{{stats.lastSubmission | date}}</td>
+				</tr>
+				<tr>
+					<td>ToDo Size:</td>
+					<td>{{stats.todoSize}}</td>
+				</tr>
+				<tr>
+					<td>Problems Solved:</td>
+					<td>{{stats.problemsSolved}}</td>
+				</tr>
 			</table>
 		</div>
-		<table class="table">
-			<tr>
-				<td>% Tenacity</td>
-				<td>{{stats.tenacity}}%</td> <!-- log([11-x/10])/log(11)*100 -->
-			</tr>
-			<tr>
-				<td>% Accuracy</td>
-				<td>{{stats.accuracy}}%</td>
-			</tr>
-			<tr>
-				<td>
-					Practice Level 
-				</td>
-				<td title="problems per day">100 PPD</td>
-			</tr>
-			<tr>
-				<td>
-					Last Submission: 
-				</td>
-				<td>{{stats.lastSubmission | date}}</td>
-			</tr>
-			<tr>
-				<td>ToDo Size:</td>
-				<td>{{stats.todoSize}}</td>
-			</tr>
-			<tr>
-				<td>Problems Solved:</td>
-				<td>{{stats.problemsSolved}}</td>
-			</tr>
-		</table>
+
+
+	</form>
+
+
 	</div>
-
-
-</form>
+</section>
