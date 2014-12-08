@@ -1,4 +1,87 @@
 
+<style>
+
+    button.icon {
+        margin: 5px;
+        height: 40px;
+        width: 40px;
+        color:white;
+        background-color: #444;
+        font-size:10px;
+        padding: 5px 0px;
+        border:none;
+        text-align: center;
+        border-radius: 5px;
+        border: 1px solid #000;
+    }
+    button.icon span{
+        font-size: 13px;
+    }
+    button.icon:hover{
+        color:white;
+        background-color: #666;
+        border: 1px solid #aaa;
+
+    }
+    button.icon:active{
+        color:white;
+        background-color: #777;
+    }
+
+    .chart {
+        height: 300px;
+    }
+
+    .submissionsTable {
+        height: 300px;
+        margin-bottom: 10px;
+        padding: 0px;
+        background-color: #f8f8f8;
+    }
+
+    .submissionsTable table {
+        width: 100%;
+    }
+
+    .submissionsTable thead, .submissionsTable tbody, .submissionsTable tr,
+    .submissionsTable td, .submissionsTable th {
+        display: block;
+    }
+
+    .submissionsTable tr:after {
+        content: ' ';
+        display: block;
+        visibility: hidden;
+        clear: both;
+    }
+
+    .submissionsTable thead th {
+        height: 30px;
+        text-align: center;
+        border-bottom: none !important;
+    }
+
+    .submissionsTable tbody {
+        height: 270px;
+        overflow-y: auto;
+        text-align: center;
+        margin-bottom: -5px;
+    }
+
+    .submissionsTable thead {
+        background-color: #428BCA;
+        border-bottom: 1px solid black;
+        color: white;
+        box-shadow: 0px 3px 2px -3px black;
+        border-radius: 5px 5px 0px 0px;
+        /* fallback */
+    }
+
+    .submissionsTable tbody td, .submissionsTable thead th {
+        width: 14.2%;
+        float: left;
+    }
+</style>
 <section class="header">
 	<ul class="nav nav-pills" role="tablist">
 		<li class="active"><a href="#">SPOJ</a></li>
@@ -8,75 +91,22 @@
 	</ul>
 </section>
 <section class="body">
-	<spoj-v-nav class="leftPanel"> </spoj-v-nav>
-	<form class="form-inline" role="form" ng-controller="SpojController">
-		<div style="display: inline-table; width: 30px;"></div>
-		<div class="form-group">
-			<div class="input-group">
-				<label for="addHandle" class="input-group-addon">Handle</label> <input
-					type="text" ng-model="handle" ng-init="handle='ggonzales'"
-					class="form-control" id="addHandle" />
-			</div>
-		</div>
-		<button type="submit" class="btn btn-default" ng-click="submit()">
-			Run Stats</button>
+    <div class="leftPanel">
+        <button class="btn btn-default icon" >
+            <span class="glyphicon glyphicon-signal"></span><br/>
+            Stats
+        </button>
+        <button class="btn btn-default icon" >
+            <span class="glyphicon glyphicon-th-large"></span><br/>
+            Probs
+        </button>
+        <button class="btn btn-default icon" >
+            <span class="glyphicon glyphicon-eye-open"></span><br/>
+            Stalk
+        </button>
+    </div>
+	<form class="middlePanel" role="form" ng-controller="SpojController">
 
-		<style>
-.chart {
-	height: 300px;
-}
-
-.submissionsTable {
-	height: 300px;
-	margin-bottom: 10px;
-	padding: 0px;
-	background-color: #f8f8f8;
-}
-
-.submissionsTable table {
-	width: 100%;
-}
-
-.submissionsTable thead, .submissionsTable tbody, .submissionsTable tr,
-	.submissionsTable td, .submissionsTable th {
-	display: block;
-}
-
-.submissionsTable tr:after {
-	content: ' ';
-	display: block;
-	visibility: hidden;
-	clear: both;
-}
-
-.submissionsTable thead th {
-	height: 30px;
-	text-align: center;
-	border-bottom: none !important;
-}
-
-.submissionsTable tbody {
-	height: 270px;
-	overflow-y: auto;
-	text-align: center;
-	margin-bottom: -5px;
-}
-
-.submissionsTable thead {
-	background-color: #428BCA;
-	border-bottom: 1px solid black;
-	color: white;
-	box-shadow: 0px 3px 2px -3px black;
-	border-radius: 5px 5px 0px 0px;
-	/* fallback */
-}
-
-.submissionsTable tbody td, .submissionsTable thead th {
-	width: 14.2%;
-	float: left;
-}
-</style>
-		<div style="border-top: 1px solid #aaa; margin-top: 10px;"></div>
 		<div class="jumbotron" style="background-color: #fff;">
 			<div data-ac-chart="'bar'" data-ac-data="data"
 				data-ac-config="config" class="chart col-md-3"></div>

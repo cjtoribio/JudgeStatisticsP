@@ -4,6 +4,7 @@ body {
 section.header {
 	padding: 8px 20px;
 	background-color: white;
+    border-bottom: 1px solid #d3d3d3;
 }
 section.body {
 	background-color: #fff;
@@ -17,5 +18,10 @@ section.body {
 	width: 60px;
 	color: white;
 	background-color: black;
-	display: table-cell;
+    display: table-cell;
+    vertical-align: top;
+}
+.middlePanel {
+    display: table-cell;
+
 }
